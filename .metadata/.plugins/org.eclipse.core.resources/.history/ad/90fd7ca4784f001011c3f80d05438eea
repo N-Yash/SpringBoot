@@ -1,0 +1,58 @@
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.AllArgsConstructor;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+
+@AllArgsConstructor
+@RestController
+@RequestMapping("books")
+public class BookController {
+
+	@Autowired
+	private BookService service;
+
+	@GetMapping
+	public Flux<BookModel> getAll() {
+		System.out.println("All the Books information");
+		return service.getAll();
+
+	}
+
+	@GetMapping("{id}")
+	public Mono<BookModel> getById(@PathVariable("id") final String id) {
+		System.out.println("One Book Model information based for the given ID");
+		return service.getById(id);
+	}
+
+	@PutMapping("{id}")
+	public Mono<BookModel> updateById(@PathVariable("id") final String id,
+			@RequestBody final BookModel employee) {
+		System.out.println("Updating an Book Model Info");
+		return service.update(id, employee);
+	}
+
+	@PostMapping
+	public Mono<BookModel> save(@RequestBody final BookModel model) {
+		System.out.println("Added New Book Model Info " + model.toString());
+		return service.save(model);
+
+	}
+
+	@DeleteMapping("{id}")
+	public Mono<BookModel> delete(@PathVariable final String id) {
+		System.out.println("An Book Model Info deleted");
+		return service.delete(id);
+	}
+}

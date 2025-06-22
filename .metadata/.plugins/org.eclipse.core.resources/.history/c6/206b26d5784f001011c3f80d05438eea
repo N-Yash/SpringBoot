@@ -1,0 +1,47 @@
+package com.example.demo;
+package com.archpatel.assignment3;
+
+import java.util.Objects;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import lombok.AllArgsConstructor;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@Service
+@Transactional
+@AllArgsConstructor
+public class BookService {
+
+	@Autowired
+	private BookRepository repository;
+
+	public Flux<BookModel> getAll() {
+		return repository.findAll().switchIfEmpty(Flux.empty());
+	}
+
+	public Mono<BookModel> getById(final String id) {
+		return repository.findById(id);
+	}
+
+	public Mono<BookModel> update(final String id, final BookModel model) {
+		return repository.save(model);
+	}
+
+	public Mono<BookModel> save(final BookModel employee) {
+		return repository.save(employee);
+	}
+
+	public Mono<BookModel> delete(final String id) {
+		final Mono<BookModel> dbRecord = getById(id);
+		if (Objects.isNull(dbRecord)) {
+			return Mono.empty();
+		}
+
+		return getById(id).switchIfEmpty(Mono.empty()).filter(Objects::nonNull).flatMap(
+				employeeToBeDeleted -> repository.delete(employeeToBeDeleted).then(Mono.just(employeeToBeDeleted)));
+	}
+
+}

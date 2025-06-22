@@ -741,4 +741,5 @@
   <uri name="urn:wildfly:microprofile-reactive-messaging-smallrye:1.0" uri="jar:file:/C:/Users/yashn/.p2/pool/plugins/org.jboss.tools.as.catalog_3.10.3.v20230714-1629.jar!/schema/xsd/wildfly-microprofile-reactive-messaging-smallrye_1_0.xsd"/>
   <uri name="urn:wildfly:microprofile-reactive-streams-operators-smallrye:1.0" uri="jar:file:/C:/Users/yashn/.p2/pool/plugins/org.jboss.tools.as.catalog_3.10.3.v20230714-1629.jar!/schema/xsd/wildfly-microprofile-reactive-streams-operators-smallrye_1_0.xsd"/>
   <uri name="urn:xnio:3.5" uri="jar:file:/C:/Users/yashn/.p2/pool/plugins/org.jboss.tools.as.catalog_3.10.3.v20230714-1629.jar!/schema/xsd/xnio_3_5.xsd"/>
+  <public publicId="-//LOG4J//DTD LOG4J//EN" uri="jar:file:/C:/Users/yashn/.p2/pool/plugins/org.springsource.ide.eclipse.commons.ui_4.31.0.202506052016.jar!/dtd/log4j-1.2.dtd" webURL="https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd"/>
 </catalog>

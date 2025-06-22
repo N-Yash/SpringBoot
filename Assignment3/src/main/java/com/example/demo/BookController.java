@@ -1,0 +1,53 @@
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import lombok.AllArgsConstructor;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+
+@AllArgsConstructor
+@RestController
+@RequestMapping("/books")
+public class BookController {
+
+	@Autowired
+	private BookService service;
+
+	@GetMapping
+	public Flux<Book> getAll() {
+		return service.getAll();
+
+	}
+
+	@GetMapping("{id}")
+	public Mono<Book> getById(@PathVariable("id") final String id) {
+		return service.getById(id);
+	}
+
+	@PutMapping("{id}")
+	public Mono<Book> updateById(@PathVariable("id") final String id,
+			@RequestBody final Book employee) {
+		return service.update(id, employee);
+	}
+
+	@PostMapping
+	public Mono<Book> save(@RequestBody final Book model) {
+		return service.save(model);
+
+	}
+
+	@DeleteMapping("{id}")
+	public Mono<Book> delete(@PathVariable final String id) {
+		return service.delete(id);
+	}
+}

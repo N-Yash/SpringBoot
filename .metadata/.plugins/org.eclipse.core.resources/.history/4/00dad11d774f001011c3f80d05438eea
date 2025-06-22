@@ -1,0 +1,24 @@
+package com.example.demo;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+@RequestMapping("/publishers")
+@RequiredArgsConstructor
+public class PublisherController {
+	
+    private PublisherService publisherService;
+
+    @PostMapping
+    public Mono<Publisher> addPublisher(@RequestBody Publisher publisher) {
+        return publisherService.savePublisher(publisher);
+    }
+
+    @GetMapping
+    public Flux<Publisher> getAllPublishers() {
+        return publisherService.getAllPublishers();
+    }
+}

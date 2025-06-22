@@ -1,0 +1,26 @@
+package com.example.demo;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+@RequestMapping("/books")
+public class Book_Controller {
+
+    @Autowired
+    private Book_Services bookService;
+
+    // BOOK
+    @PostMapping
+    public Mono<Book> addBook(@RequestBody Book book) {
+        return bookService.addBook(book);
+    }
+
+    @GetMapping
+    public Flux<Book> getBooks() {
+        return bookService.getAllBooks();
+    }
+}

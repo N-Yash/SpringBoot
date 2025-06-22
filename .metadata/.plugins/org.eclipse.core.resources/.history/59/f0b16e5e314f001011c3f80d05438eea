@@ -1,0 +1,28 @@
+package com.example.demo;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+@RequestMapping("/members")
+@RequiredArgsConstructor
+public class MemberController {
+	
+    private  MemberService memberService;
+
+    public MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+    
+    @PostMapping
+    public Mono<Member> addMember(@RequestBody Member member) {
+        return memberService.saveMember(member);
+    }
+
+    @GetMapping
+    public Flux<Member> getAllMembers() {
+        return memberService.getAllMembers();
+    }
+}
